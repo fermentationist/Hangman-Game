@@ -4,12 +4,20 @@ function HangmanGame(phraseList, lives) {
 	this.puzzle = new Puzzle(phraseList);
 	this.lives = lives;
 	this.wins = 0;
+	var threatLevels = ["black", "red", "orange", "yellow", "green", "blue", "indigo", "violet"];
+	var threatInverse = ["white", "blue", "indigo", "violet", "magenta", "red", "orange", "yellow"];
 	this.updateScreen = function(){
 		//display this.puzzle
 		console.log(this.puzzle.board());
 		console.log("Wins: " + this.wins);
 		console.log("Already Guessed: " + this.alreadyGuessed.join(" "));
 		console.log("Number of Incorrect Guesses Remaining: " + this.lives);
+    document.querySelector("#board").innerHTML = this.puzzle.board();
+    document.querySelector("#lives").innerHTML = "Incorrect guesses left: " + this.lives;
+    document.querySelector("#guessed").innerHTML = "Already guessed: " + this.alreadyGuessed.join(" ");
+    document.querySelector("#wins").innerHTML = "Wins: " + this.wins;
+    document.querySelector(".jumbotron").style.background = threatLevels[this.lives];
+    document.querySelector(".jumbotron").style.color = threatInverse[this.lives];
 	}
 
 	this.legalMove = function(char){
@@ -63,7 +71,7 @@ function Puzzle(phraseList){
 	this.currentSolution = this.letters.slice();
 	for (var i = 0; i < this.length; i++){
 		if (this.currentSolution[i] === " "){
-			//do nothing;
+			this.currentSolution[i] = " ";
 		}else if(this.currentSolution[i] === "-"){
 			this.currentSolution[i] = "-";
 		}else if(this.currentSolution[i] === "'"){
@@ -73,7 +81,7 @@ function Puzzle(phraseList){
 		}
 	}
 	this.board = function(){
-		return this.currentSolution.join(" ");
+		return this.currentSolution.join("");
 	}
 	this.guess = function(char){
 		var matches = 0;
