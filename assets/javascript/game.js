@@ -36,28 +36,48 @@ function HangmanGame(phraseList, lives) {
 			if (guess == 0){
 				this.lives --;
 				if (this.lives < 1){
-				console.log("Game Over -- You Lose");
-				return this.newGame();
+					return this.youLose();
 				}else{
-				return this.updateScreen();
+					return this.updateScreen();
 				}
 			}
 			if(this.puzzle.board().indexOf("_") == -1) {
-				console.log("You win!");
-				console.log("***** " + this.puzzle.board() + " *****");
-				this.wins ++;
-				return this.newGame();
+				return this.youWin();
+
 			}else{
 				return this.updateScreen();
 			}
 		}
 	}
 
+	this.youLose = function(){
+		var answer = this.puzzle.phrase;
+		var nextGame = this.newGame();
+		document.querySelector(".jumbotron h1").innerHTML = "You Lose!";
+		document.querySelector("#board").innerHTML = answer;
+		document.onkeyup = function(){
+			return nextGame;
+		}
+	}
+
+	this.youWin = function(){
+		this.wins ++;
+		var answer = this.puzzle.phrase;
+		var nextGame = this.newGame();
+		document.querySelector(".jumbotron h1").innerHTML = "You Win!";
+		document.querySelector("#board").innerHTML = answer;
+		document.onkeyup = function(){
+			return nextGame;
+		}
+	}
+
+
 	this.newGame = function(){
 		console.log("new puzzle!");
 		this.puzzle = new Puzzle(phraseList);
 		this.lives = lives;
 		this.alreadyGuessed = [];
+		document.querySelector(".jumbotron h1").innerHTML = "Hangman";
 		return this.updateScreen();
 	}
 }
