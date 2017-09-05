@@ -17,24 +17,24 @@ function Puzzle(phraseList){
 	}
 	this.guess = function(char){
 		var matches = 0;
-		console.log(char);
-		// for (var n = 0; n < this.length; n++){
-		// 	if (this.letters[n].toLowerCase() === char.toLowerCase()){
-		// 		this.currentSolution[n] = this.letters[n];
-		// 		matches ++;
-		// 	}
-		// }
-		// return matches;
+		for (var n = 0; n < this.length; n++){
+			if (this.letters[n].toLowerCase() === char.toLowerCase()){
+				this.currentSolution[n] = this.letters[n];
+				matches ++;
+			}
+		}
+		console.log(matches);
+		return matches;
 	}
 	
 }
 
 
-function HangmanGame(phraseList, lives, wins) {
+function HangmanGame(phraseList, lives) {
 	this.alreadyGuessed = [];
 	this.puzzle = new Puzzle(phraseList);
 	this.lives = lives;
-	this.wins = wins;
+	this.wins = 0;
 	this.updateScreen = function(){
 		//display this.puzzle
 		console.log(this.puzzle.board());
@@ -44,37 +44,71 @@ function HangmanGame(phraseList, lives, wins) {
 	}
 
 	this.legalMove = function(char){
-		return /\w/.test(char) && !(char.toLowerCase() in this.alreadyGuessed);//&
+		return /\w/.test(char) && !(this.alreadyGuessed.includes(char.toLowerCase()));
 	}
 
 	this.takeTurn = function(event){
 		var letter = event;//replace with keypress event
-		console.log("event = " + event);
 		if (!this.legalMove(letter)){
+			console.log("illegal move");
 			return;
 			//do nothing
 		}else{
-			var guess = this.puzzle.guess();
+			var guess = this.puzzle.guess(letter);
 			this.alreadyGuessed.push(letter.toLowerCase());
 			if (guess == 0){
 				this.lives --;
 				return this.updateScreen();
-			}
-			if(this.puzzle.board().indexOf("_") == -1) {
+			}else if(this.puzzle.board().indexOf("_") == -1) {
 				console.log("You win!");
 				this.wins ++;
+				return this.newGame();
+			}else if (this.lives < 1){
+				console.log("Game Over -- You Lose");
+				return this.newGame();
+			}else{
 				return this.updateScreen();
 			}
 		}
-
 	}
+
+	this.newGame = function(){
+		console.log("new puzzle!");
+		this.puzzle = new Puzzle(phraseList);
+		this.lives = lives;
+		this.alreadyGuessed = [];
+		return this.updateScreen();
+	}
+
+
+
 }
 
 
 
-var game = new HangmanGame(["this is just a puzzle", "now another puzzle"], 7, 0);
+var game = new HangmanGame(["this is just a puzzle", "now another puzzle"], 7);
 game.updateScreen();
 game.takeTurn("z");
+game.takeTurn("u");
+game.takeTurn("p");
+game.takeTurn("l");
+game.takeTurn("t");
+game.takeTurn("e");
+game.takeTurn("h");
+game.takeTurn("z");
+game.takeTurn("+");
+game.takeTurn("i");
+game.takeTurn("s");
+game.takeTurn("n");
+game.takeTurn("o");
+game.takeTurn("w");
+game.takeTurn("j");
+game.takeTurn("q");
+game.takeTurn("y");
+game.takeTurn("a");
+game.takeTurn("x");
+game.takeTurn("b");
+
 
 
 
