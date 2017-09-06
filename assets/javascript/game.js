@@ -4,6 +4,7 @@ function HangmanGame(phraseList, lives) {
 	this.puzzle = new Puzzle(phraseList);
 	this.lives = lives;
 	this.wins = 0;
+	var gameOver = false;
 	var threatLevels = ["black", "red", "orange", "yellow", "green", "blue", "indigo", "violet"];
 	var threatInverse = ["white", "blue", "indigo", "violet", "magenta", "red", "orange", "yellow"];
 	this.updateScreen = function(){
@@ -25,6 +26,9 @@ function HangmanGame(phraseList, lives) {
 	}
 
 	this.takeTurn = function(event){
+		if (gameOver){
+			return;
+		}
 		var letter = event;//replace with keypress event
 		if (!this.legalMove(letter)){
 			console.log("illegal move");
@@ -36,6 +40,7 @@ function HangmanGame(phraseList, lives) {
 			if (guess == 0){
 				this.lives --;
 				if (this.lives < 1){
+					this.updateScreen();
 					return this.youLose();
 				}else{
 					return this.updateScreen();
@@ -52,13 +57,11 @@ function HangmanGame(phraseList, lives) {
 
 	this.youLose = function(){
 		var answer = this.puzzle.phrase;
-		var nextGame = this.newGame();
 		document.querySelector(".jumbotron h1").innerHTML = "You Lose!";
 		document.querySelector("#board").innerHTML = answer;
-
-		document.onkeyup() = function(){
-			return nextGame;
-		}
+		document.querySelector("#button").style.display = "initial";
+		gameOver = true;
+		return;
 	}
 
 	this.youWin = function(){
@@ -67,14 +70,14 @@ function HangmanGame(phraseList, lives) {
 		document.querySelector(".jumbotron h1").innerHTML = "You Win!";
 		document.querySelector("#board").innerHTML = answer;
 		document.querySelector("#button").style.display = "initial";
-		var nextGame = this.newGame();
-		document.onkeyup = function(){
-			return nextGame;
-		}
+		gameOver = true;
+		return;
 	}
 
 
 	this.newGame = function(){
+		gameOver = false;
+		document.querySelector("#button").style.display = "none";
 		document.querySelector(".jumbotron h1").innerHTML = "Hangman";
 		this.updateScreen();
 		console.log("new puzzle!");

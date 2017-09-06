@@ -1,11 +1,11 @@
-#board {
-	font-size:36px;
-}
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower|Josefin+Sans|Space+Mono');
 
 #board {
+	font-size:36px;
 	white-space:normal;
 	letter-spacing: 30px;
 	color:black;
+	font-family:"Space Mono";/*"Josefin Sans";/*"Helvetica Neue";*/
 }
 .jumbotron div {
 	font-size:24px;
@@ -22,6 +22,8 @@ footer {
 
 .jumbotron {
 	max-width:1260px;
+	margin-bottom:0;
+	font-family:"Josefin Sans";/*"Indie Flower";*/
 }
 
 .jumbotron h1 {
@@ -38,6 +40,19 @@ footer {
 }
 
 #thanks {
-	font-size:10px;
+	font-size:14px;
 	text-align:center;
+	margin-top:15px;
+}
+
+div.panel.panel-inverse {
+	margin-bottom:0;
+}
+
+@media screen and (max-width:768px){
+	#board {
+		letter-spacing:15px;
+		font-size:20px;
+	}
+
 }
