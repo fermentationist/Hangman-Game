@@ -56,5 +56,8 @@ div.panel.panel-inverse {
 		letter-spacing:15px;
 		font-size:20px;
 	}
+	.jumbotron h1 {
+		font-size:60px;
+	}
 
 }
