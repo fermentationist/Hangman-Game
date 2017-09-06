@@ -55,7 +55,8 @@ function HangmanGame(phraseList, lives) {
 		var nextGame = this.newGame();
 		document.querySelector(".jumbotron h1").innerHTML = "You Lose!";
 		document.querySelector("#board").innerHTML = answer;
-		document.onkeyup = function(){
+
+		document.onkeyup() = function(){
 			return nextGame;
 		}
 	}
@@ -63,9 +64,10 @@ function HangmanGame(phraseList, lives) {
 	this.youWin = function(){
 		this.wins ++;
 		var answer = this.puzzle.phrase;
-		var nextGame = this.newGame();
 		document.querySelector(".jumbotron h1").innerHTML = "You Win!";
 		document.querySelector("#board").innerHTML = answer;
+		document.querySelector("#button").style.display = "initial";
+		var nextGame = this.newGame();
 		document.onkeyup = function(){
 			return nextGame;
 		}
@@ -73,11 +75,12 @@ function HangmanGame(phraseList, lives) {
 
 
 	this.newGame = function(){
+		document.querySelector(".jumbotron h1").innerHTML = "Hangman";
+		this.updateScreen();
 		console.log("new puzzle!");
 		this.puzzle = new Puzzle(phraseList);
 		this.lives = lives;
 		this.alreadyGuessed = [];
-		document.querySelector(".jumbotron h1").innerHTML = "Hangman";
 		return this.updateScreen();
 	}
 }
