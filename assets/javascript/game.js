@@ -124,7 +124,7 @@ function Puzzle(phraseList){
 }
 
 function openKeyboard(){
-	document.getElementById("keyboardOpen").focus();
+	// document.getElementById("keyboardOpen").focus();
 	document.getElementById("keyboardOpen").select();
 }
 
