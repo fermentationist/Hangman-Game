@@ -11,7 +11,7 @@
 	/*display:none;*/
 	background-color:inherit;
 	border:none;
-	width:0;
+	width:1;
 }
 }
 .jumbotron div {
@@ -35,7 +35,7 @@ footer {
 }
 
 .jumbotron h1 {
-	padding-bottom:25px;
+	padding-bottom:0px;
 	font-size:96px;
 }
 
