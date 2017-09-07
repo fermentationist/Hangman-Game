@@ -57,9 +57,12 @@ function HangmanGame(phraseList, lives) {
 
 	this.youLose = function(){
 		var answer = this.puzzle.phrase;
+		document.querySelector(".jumbotron h1").style.display = "initial";
 		document.querySelector(".jumbotron h1").innerHTML = "You Lose!";
 		document.querySelector("#board").innerHTML = answer;
+		document.querySelector("#keyboardOpen").blur(); 
 		document.querySelector("#button").style.display = "initial";
+		document.querySelector("#button").focus();
 		gameOver = true;
 		return;
 	}
@@ -72,6 +75,7 @@ function HangmanGame(phraseList, lives) {
 		document.querySelector("#board").innerHTML = answer;
 		document.querySelector("#keyboardOpen").blur(); 
 		document.querySelector("#button").style.display = "initial";
+		document.querySelector("#button").focus();
 		gameOver = true;
 		return;
 	}
