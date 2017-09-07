@@ -51,6 +51,9 @@ footer {
 #wins {
 	padding-bottom:15px;
 }
+#lives, #guessed, #wins {
+	font-size:1.5em;
+}
 
 #thanks {
 	font-size:14px;
@@ -89,6 +92,7 @@ div.panel.panel-inverse {
 	}
 	.jumbotron h1 {
 		font-size:60px;
+		width:auto;
 	}
 
 }

@@ -12,10 +12,14 @@
 </head>
 <body onload="thisGame.updateScreen()">
 	<div class="container-fluid">
-		<div class="jumbotron">
-			<h1>Hangman</h1>
+		<div class="jumbotron clearfix">
 			<div class="row">
-			<div class="col-md-11">
+			<div class="col-md-12">
+			<h1>Hangman</h1>
+			</div>
+			</div>
+			<div class="row">
+			<div class="col-md-12">
 			<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="panel-title">Current Phrase</div>
@@ -24,33 +28,29 @@
 				
 				<div id="board" onclick = "openKeyboard()">
 				
-					
-					
-					
+				<!--Puzzle appears here. Clicking it opens keyboard on mobile-->
+						
 				</div>
 			</div>
 			</div>
 			</div>
 				<input type="text" id="keyboardOpen">
 			</div>
-<!-- 				<div id="keyboard">
-					<i class="fa fa-keyboard-o" aria-hidden="true">
-						<input type="text" onclick = "openKeyboard()">
-					</i>
-				</div>
- -->			
-				
+			<div class="row">
+			<div class="col-md-12">
  				<div id="lives">
-				
+				<!--Incorrect guesses left-->
 				</div>
 				<div id="guessed">
-				
+				<!--Letters already guessed-->
 				</div>
 				<div id="wins">
-					
+				<!--Number of wins-->
 				</div>
 			
 		  	<p id="button"><a class="btn btn-default btn-lg" onclick="thisGame.newGame()" role="button">Next Game</a></p>
+		</div>
+		</div>
 		</div>
     <footer>
 
