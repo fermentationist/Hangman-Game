@@ -22,7 +22,7 @@ function HangmanGame(phraseList, lives) {
 	}
 
 	this.legalMove = function(char){
-		return /[A-Za-z]/.test(char) && !(this.alreadyGuessed.includes(char.toLowerCase()));
+		return !(this.alreadyGuessed.includes(char.toLowerCase()));
 	}
 
 	this.takeTurn = function(event){
@@ -141,7 +141,9 @@ var thisGame = new HangmanGame(colorIdioms, 6);
 
 document.onkeyup = function(event){
 	var guess = event.key;
+	if (event.keyCode >= 65 && event.keyCode <= 90){
 	thisGame.takeTurn(guess);
+	}
 }
 
 
