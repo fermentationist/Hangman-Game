@@ -22,7 +22,7 @@ function HangmanGame(phraseList, lives) {
 	}
 
 	this.legalMove = function(char){
-		return /\w/.test(char) && !(this.alreadyGuessed.includes(char.toLowerCase()));
+		return /[A-Za-z]/.test(char) && !(this.alreadyGuessed.includes(char.toLowerCase()));
 	}
 
 	this.takeTurn = function(event){
