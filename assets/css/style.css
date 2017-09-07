@@ -8,10 +8,10 @@
 	font-family:"Space Mono";/*"Josefin Sans";/*"Helvetica Neue";*/
 }
 #keyboardOpen {
-	/*display:none;*/
+	display:none;
 	background-color:inherit;
 	border:none;
-	width:1;
+	max-width:1;
 }
 }
 .jumbotron div {
