@@ -10,14 +10,14 @@
 #keyboardOpen {
 	background-color:inherit;
 	border:none;
-	width:0px;
+	width:0;
 	color:transparent;
 	cursor:none;
 	position:fixed;
 	top:-100px;
 
 }
-}
+
 .jumbotron div {
 	font-size:24px;
 }
@@ -26,10 +26,6 @@ footer {
 	text-align:center;
 	max-width:1260px;
 	font-family:"Josefin Sans";
-}
-
-#button {
-	padding-top:15px;
 }
 
 .jumbotron {
@@ -57,20 +53,27 @@ footer {
 }
 
 #thanks {
-	font-size:14px;
+	font-size:12px;
 	text-align:center;
-	margin-top:15px;
+	margin:15px 0 0 0;
+	color:gray;
+	padding-left:40px;
+	padding-right:40px;
+}
+#copyright {
+	padding-top:0;
 }
 
 div.panel.panel-inverse {
 	margin-bottom:0;
 }
 
-.clearfix :after{
-	display:block;
-	content:"";
-	clear:both;
+div.container-fluid {
+	margin-top:5%;
+	margin-left:5%;
+	margin:5%;
 }
+
 
 @media screen and (max-width:768px){
 	#board {
@@ -97,5 +100,11 @@ div.panel.panel-inverse {
 		font-size:60px;
 		width:auto;
 	}
+	#thanks {
+		font-size:10px;
+	}
+	#lives, #guessed, #wins {
+	font-size:1em;
+}
 
 }

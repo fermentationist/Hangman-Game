@@ -14,8 +14,8 @@ function HangmanGame(phraseList, lives) {
 		console.log("Already Guessed: " + this.alreadyGuessed.join(" "));
 		console.log("Number of Incorrect Guesses Remaining: " + this.lives);
     document.querySelector("#board").innerHTML = this.puzzle.board();
-    document.querySelector("#lives").innerHTML = "Incorrect guesses left: " + this.lives;
-    document.querySelector("#guessed").innerHTML = "Already guessed: " + this.alreadyGuessed.join(" ");
+    document.querySelector("#lives").innerHTML = "guesses left: " + this.lives;
+    document.querySelector("#guessed").innerHTML = "already guessed: " + this.alreadyGuessed.join(" ");
     document.querySelector("#wins").innerHTML = "Wins: " + this.wins;
     document.querySelector(".jumbotron").style.background = threatLevels[this.lives];
     document.querySelector(".jumbotron").style.color = threatInverse[this.lives];
