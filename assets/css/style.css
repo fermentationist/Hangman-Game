@@ -62,10 +62,30 @@ div.panel.panel-inverse {
 	margin-bottom:0;
 }
 
+.clearfix :after{
+	display:block;
+	content:"";
+	clear:both;
+}
+
 @media screen and (max-width:768px){
 	#board {
 		letter-spacing:15px;
 		font-size:20px;
+	}
+	.jumbotron h1 {
+		font-size:60px;
+	}
+
+}
+
+@media screen and (max-width:380px){
+	#board {
+		letter-spacing:12px;
+		font-size:18px;
+	}
+	.panel-default {
+		max-width: 360px;
 	}
 	.jumbotron h1 {
 		font-size:60px;
