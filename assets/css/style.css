@@ -91,6 +91,7 @@ div.panel.panel-inverse {
 	div.container-fluid {
 		max-width: 360px;
 		min-width:320px;
+		width:100%;
 	}
 	.jumbotron h1 {
 		font-size:60px;
