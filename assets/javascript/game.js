@@ -70,7 +70,7 @@ function HangmanGame(phraseList, lives) {
 		document.querySelector(".jumbotron h1").style.display = "initial";
 		document.querySelector(".jumbotron h1").innerHTML = "You Win!";
 		document.querySelector("#board").innerHTML = answer;
-		document.querySelector("#button").focus();
+		document.querySelector("#keyboardOpen").blur(); 
 		document.querySelector("#button").style.display = "initial";
 		gameOver = true;
 		return;
