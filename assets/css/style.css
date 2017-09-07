@@ -7,22 +7,9 @@
 	color:black;
 	font-family:"Space Mono";/*"Josefin Sans";/*"Helvetica Neue";*/
 }
-#keyboard input{
-	width:120px;
-	background-color:inherit;
-	border:none;
-	font-family:"FontAwesome";
-	color:yellow;
-/*	.fa-keyboard-o:before {*/
-  	content: "\f11c";
+#keyboardOpen {
+	display:none;
 }
-#board input {
-	width:100%;
-	height:100%;
-	border:none;
-}
-#keyboard i {
-	font-size:64px;
 }
 .jumbotron div {
 	font-size:24px;
