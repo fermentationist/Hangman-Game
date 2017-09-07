@@ -88,8 +88,9 @@ div.panel.panel-inverse {
 		letter-spacing:12px;
 		font-size:18px;
 	}
-	.jumbotron {
-		max-width: 340px;
+	div.container-fluid {
+		max-width: 360px;
+		min-width:320px;
 	}
 	.jumbotron h1 {
 		font-size:60px;
