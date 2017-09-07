@@ -8,7 +8,7 @@
 	font-family:"Space Mono";/*"Josefin Sans";/*"Helvetica Neue";*/
 }
 #keyboardOpen {
-	display:none;
+	visibility:hidden;
 	background-color:inherit;
 	border:none;
 	max-width:1;
