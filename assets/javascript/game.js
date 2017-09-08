@@ -139,11 +139,13 @@ var colorIdioms = ["a white lie","white noise","white as a sheet","white as a gh
 var phraseList = ["this is just a puzzle", "now another puzzle"];
 var thisGame = new HangmanGame(colorIdioms, 6);
 
-document.onkeyup = function(event){
-	var guess = event.key;
-	if (event.keyCode >= 65 && event.keyCode <= 90){
+document.oninput = function(event){
+	var guess = event.data;
+	console.log(guess);
 	thisGame.takeTurn(guess);
-	}
+	// if (event.keyCode >= 65 && event.keyCode <= 90){
+	// thisGame.takeTurn(guess);
+	// }
 }
 
 
