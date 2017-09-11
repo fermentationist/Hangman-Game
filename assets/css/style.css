@@ -7,7 +7,7 @@
 	color:black;
 	font-family:"Space Mono";/*"Josefin Sans";/*"Helvetica Neue";*/
 }
-#keyboardOpen {
+#hiddenInput {
 	background-color:inherit;
 	border:none;
 	width:0;

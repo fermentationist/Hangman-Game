@@ -59,7 +59,7 @@ function HangmanGame(phraseList, lives) {
 		document.querySelector(".jumbotron h1").style.display = "initial";
 		document.querySelector(".jumbotron h1").innerHTML = "You Lose!";
 		document.querySelector("#board").innerHTML = answer;
-		document.querySelector("#keyboardOpen").blur(); 
+		document.querySelector("#hiddenInput").blur(); 
 		document.querySelector("#button").style.display = "initial";
 		document.querySelector("#button").focus();
 		gameOver = true;
@@ -72,7 +72,7 @@ function HangmanGame(phraseList, lives) {
 		document.querySelector(".jumbotron h1").style.display = "initial";
 		document.querySelector(".jumbotron h1").innerHTML = "You Win!";
 		document.querySelector("#board").innerHTML = answer;
-		document.querySelector("#keyboardOpen").blur(); 
+		document.querySelector("#hiddenInput").blur(); 
 		document.querySelector("#button").style.display = "initial";
 		document.querySelector("#button").focus();
 		gameOver = true;
@@ -81,7 +81,7 @@ function HangmanGame(phraseList, lives) {
 
 
 	this.newGame = function(){
-		document.querySelector("#keyboardOpen").innerHTML = ""; 
+		document.querySelector("#hiddenInput").innerHTML = ""; 
 		gameOver = false;
 		document.querySelector("#button").style.display = "none";
 		document.querySelector(".jumbotron h1").innerHTML = "Hangman";
@@ -130,7 +130,7 @@ function Puzzle(phraseList){
 }
 
 function openKeyboard(){
-	document.querySelector("#keyboardOpen").select(); 
+	document.querySelector("#hiddenInput").select(); 
 	document.querySelector(".jumbotron h1").style.display = "none";
 }
 
@@ -138,42 +138,32 @@ var colorIdioms = ["a white lie","white noise","white as a sheet","white as a gh
 
 var thisGame = new HangmanGame(colorIdioms, 6);
 
-// document.onkeypress = function(event){
-// 	var guess = event.key.toLowerCase();
-// 	var charCode = guess.toLowerCase().charCodeAt();
-// 	console.log("guess = " + guess + "; charCode = " + charCode);
-// 	if (charCode >= 97 && charCode <= 122) {
-// 		thisGame.takeTurn(guess);
-// 	}
-// 	var bs = String.fromCharCode(8);
-// 	var x = document.querySelector("#keyboardOpen").text;
-// 	document.querySelector("#keyboardOpen").innerHTML = (x + bs);
-// }
-
-function simulatedBackspace(){
-	// document.querySelector("#keyboardOpen").reset = "";
-	// console.log("simulatedBackspace called");
-	// var key = $.Event( "keydown", { charCode: 8 } );
-	// $("#keyboardOpen").trigger(key);
-	document.querySelector("#keyboardOpen").select(); 
-	document.querySelector("#keyboardOpen").value = ""; 
-	// $(function() {
-    // var e = $.Event('keypress');
-    // e.which = 65; // Character 'A'
- //    console.log(e);
-    // $('#keyboardOpen').trigger(e);
+document.onkeypress = function(event){
+	var guess = event.key.toLowerCase();
+	var keyCode = event.keyCode;
+	console.log("guess = " + guess + "; keyCode = " + keyCode);
+	if (keyCode >= 97 && keyCode <= 122) {
+		thisGame.takeTurn(guess);
+	}
 }
 
+
+function simulatedBackspace(){
+	document.querySelector("#hiddenInput").select(); 
+	document.querySelector("#hiddenInput").value = ""; 
+}
+
+
+//android workaround - oninput.data, then backspace after each keystroke// 
 document.oninput = function(event){
 	var guess = event.data.toLowerCase();
-	var charCode = guess.charCodeAt() - 32;
+	var keyCode = guess.keyCodeAt();
+	console.log("guess = " + guess + "; keyCode = " + keyCode);
 	simulatedBackspace();
-	if (charCode >= 65 && charCode <= 90){
+	if (keyCode >= 97 && keyCode <= 122){
 		thisGame.takeTurn(guess);
 	}	
 
 }
-	//android workaround - oninput.data, then backspace after each keystroke
-// }
 
 
