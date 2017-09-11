@@ -146,6 +146,9 @@ document.onkeypress = function(event){
 
 //android workaround - oninput.data, then backspace after each keystroke// 
 document.oninput = function(event){
+	var guess = event.data.toLowerCase();
+	var code = guess.charCodeAt();
+	return submitGuess(guess, code);
 }
 
 //needed for Android workaround
