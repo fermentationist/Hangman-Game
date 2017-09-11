@@ -81,6 +81,7 @@ function HangmanGame(phraseList, lives) {
 
 
 	this.newGame = function(){
+		document.querySelector("#keyboardOpen").innerHTML = ""; 
 		gameOver = false;
 		document.querySelector("#button").style.display = "none";
 		document.querySelector(".jumbotron h1").innerHTML = "Hangman";
@@ -138,24 +139,41 @@ var colorIdioms = ["a white lie","white noise","white as a sheet","white as a gh
 var phraseList = ["this is just a puzzle", "now another puzzle"];
 var thisGame = new HangmanGame(colorIdioms, 6);
 
-document.onkeypress = function(event){
-	var guess = event.key.toLowerCase();
-	var charCode = guess.toLowerCase().charCodeAt();
-	console.log("guess = " + guess + "; charCode = " + charCode);
-	if (charCode >= 97 && charCode <= 122) {
-		thisGame.takeTurn(guess);
-	}
-	var bs = String.fromCharCode(8);
-	var x = document.querySelector("#keyboardOpen").text;
-	document.querySelector("#keyboardOpen").innerHTML = (x + bs);
+// document.onkeypress = function(event){
+// 	var guess = event.key.toLowerCase();
+// 	var charCode = guess.toLowerCase().charCodeAt();
+// 	console.log("guess = " + guess + "; charCode = " + charCode);
+// 	if (charCode >= 97 && charCode <= 122) {
+// 		thisGame.takeTurn(guess);
+// 	}
+// 	var bs = String.fromCharCode(8);
+// 	var x = document.querySelector("#keyboardOpen").text;
+// 	document.querySelector("#keyboardOpen").innerHTML = (x + bs);
+// }
+
+function simulatedBackspace(){
+	// document.querySelector("#keyboardOpen").reset = "";
+	// console.log("simulatedBackspace called");
+	// var key = $.Event( "keydown", { charCode: 8 } );
+	// $("#keyboardOpen").trigger(key);
+	document.querySelector("#keyboardOpen").select(); 
+	// $(function() {
+ //    var e = $.Event('keypress');
+ //    e.which = 65; // Character 'A'
+ //    console.log(e);
+ //    $('#keyboardOpen').trigger(e);});
 }
-// document.oninput = function(event){
-// 	var guess = event.data.toLowerCase();
-// 	var charCode = guess.charCodeAt() - 32;
-// 	console.log(charCode);
-// 	if (event.charCode >= 65 && event.charCode <= 90){
-// 	 thisGame.takeTurn(guess);
-// 	}//android workaround - oninput.data, then backspace after each keystroke
+
+document.oninput = function(event){
+	var guess = event.data.toLowerCase();
+	var charCode = guess.charCodeAt() - 32;
+	simulatedBackspace();
+	if (charCode >= 65 && charCode <= 90){
+		thisGame.takeTurn(guess);
+	}	
+
+}
+	//android workaround - oninput.data, then backspace after each keystroke
 // }
 
 
