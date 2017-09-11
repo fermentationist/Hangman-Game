@@ -158,10 +158,10 @@ function simulatedBackspace(){
 	document.querySelector("#keyboardOpen").select(); 
 	document.querySelector("#keyboardOpen").value = ""; 
 	// $(function() {
-    var e = $.Event('keypress');
-    e.which = 65; // Character 'A'
+    // var e = $.Event('keypress');
+    // e.which = 65; // Character 'A'
  //    console.log(e);
-    $('#keyboardOpen').trigger(e);
+    // $('#keyboardOpen').trigger(e);
 }
 
 document.oninput = function(event){
