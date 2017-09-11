@@ -157,10 +157,10 @@ function simulatedBackspace(){
 //android workaround - oninput.data, then backspace after each keystroke// 
 document.oninput = function(event){
 	var guess = event.data.toLowerCase();
-	var keyCode = guess.keyCodeAt();
-	console.log("guess = " + guess + "; keyCode = " + keyCode);
+	var charCode = guess.charCodeAt();
+	console.log("guess = " + guess + "; charCode = " + charCode);
 	simulatedBackspace();
-	if (keyCode >= 97 && keyCode <= 122){
+	if (charCode >= 97 && charCode <= 122){
 		thisGame.takeTurn(guess);
 	}	
 
