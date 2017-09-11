@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css?family=Indie+Flower|Josefin+Sans|Space+Mono');
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans|Space+Mono');
 
 #board {
 	font-size:36px;
 	white-space:normal;
 	letter-spacing: 30px;
 	color:black;
-	font-family:"Space Mono";/*"Josefin Sans";/*"Helvetica Neue";*/
+	font-family:"Space Mono";/*"Josefin Sans";*/
 }
 #hiddenInput {
 	background-color:inherit;
@@ -32,7 +32,7 @@ footer {
 	width:100%;
 	max-width:1260px;
 	margin-bottom:0;
-	font-family:"Josefin Sans";/*"Indie Flower";*/
+	font-family:"Josefin Sans";
 }
 
 .jumbotron h1 {
@@ -92,7 +92,6 @@ div.container-fluid {
 	div.container-fluid {
 		max-width: 360px;
 		min-width:320px;
-	/*	margin:0;*/
 		padding:0;
 	}
 	.jumbotron h1 {
