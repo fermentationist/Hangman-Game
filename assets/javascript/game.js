@@ -132,21 +132,21 @@ function openKeyboard(){
 }
 
 //this detects keystrokes from hard keyboard and iPhone virtual keyboard
-document.onkeypress = function(event){
-	var guess = event.key.toLowerCase();
-	var code = event.keyCode;
-	if (gameOver == true && code == 13){
-		return thisGame.newGame();
-	}
-	return submitGuess(guess, code);
-}
+// document.onkeypress = function(event){
+// 	var guess = event.key.toLowerCase();
+// 	var code = event.keyCode;
+// 	if (gameOver == true && code == 13){
+// 		return thisGame.newGame();
+// 	}
+// 	return submitGuess(guess, code);
+// }
 
 //android workaround - oninput.data, then backspace after each keystroke// 
-document.oninput = function(event){
-	var guess = event.data.toLowerCase();
-	var code = guess.charCodeAt();
-	return submitGuess(guess, code);
-}
+// document.oninput = function(event){
+// 	var guess = event.data.toLowerCase();
+// 	var code = guess.charCodeAt();
+// 	return submitGuess(guess, code);
+// }
 
 //needed for Android workaround
 function simulatedBackspace(){
@@ -154,14 +154,14 @@ function simulatedBackspace(){
 	document.querySelector("#hiddenInput").value = ""; 
 }
 
-// $('#hiddenInput').on('keyup', function( event ){
-// 	var guess = $(this).val().split('').pop().toLowerCase();
-// 	var code = guess.charCodeAt();
-// 	return submitGuess(guess, code);
-// });
+$('#hiddenInput').on('keyup', function( event ){
+	var guess = $(this).val().split('').pop().toLowerCase();
+	var code = guess.charCodeAt();
+	return submitGuess(guess, code);
+});
 
 function submitGuess(guess, code){
-	simulatedBackspace();
+	// simulatedBackspace();
 	if (code >= 97 && code <= 122){
 		return thisGame.takeTurn(guess);
 	}
