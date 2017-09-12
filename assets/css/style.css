@@ -1,12 +1,14 @@
-@import url('https://fonts.googleapis.com/css?family=Josefin+Sans|Space+Mono');
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans|Space+Mono|Share+Tech+Mono|Anonymous+Pro');
 
 #board {
+	font-weight:bold;
 	font-size:36px;
 	white-space:normal;
 	letter-spacing: 30px;
 	color:black;
-	font-family:"Space Mono";/*"Josefin Sans";*/
+	font-family:"Anonymous Pro";/*"Share Tech Mono";/*"Space Mono";/*"Josefin Sans";*/
 }
+
 #hiddenInput {
 	background-color:inherit;
 	border:none;
@@ -40,15 +42,44 @@ footer {
 	font-size:96px;
 }
 
-#button {
-	padding-top:15px;
-	display:none;
-}
-#wins {
+#score {
 	padding-bottom:15px;
 }
-#lives, #guessed, #wins {
-	font-size:1.5em;
+/*#lives, #guessed, #wins, #guessed-title{
+
+	border-style:solid;
+	border-color:white;
+	border-width:3px;
+}*/
+#button {
+	padding-top:20px;
+	display:none;
+}
+
+#button-row {
+	height:55px;
+}
+/*#wins {
+	padding-bottom:15px;
+}
+*/
+#guessed {
+	font-family:"Anonymous Pro";
+	font-weight:bold;
+	color:#272822;
+	min-height: 30px;
+}
+
+#wins {
+	text-align:center;
+}
+#losses {
+	text-align:right;
+}
+
+#guessed-panel {
+	margin-bottom:40px;
+	max-width:500px;
 }
 
 #thanks {
@@ -73,36 +104,56 @@ div.container-fluid {
 	margin:5%;
 }
 
+
+/*Media Queries*/
+@media screen and (max-width:1000px){
+	#wins, #losses {
+		text-align:left;
+	}
+}
+
 @media screen and (max-width:768px){
 	#board {
 		letter-spacing:15px;
-		font-size:20px;
+		font-size:25px;
 	}
 	.jumbotron h1 {
 		font-size:60px;
+		padding-bottom:15px;
+		text-align:center;
 	}
-
+	#guessed-panel {
+		max-width:350px;
+	}
 }
 
 @media screen and (max-width:380px){
+	div.panel-title {
+		font-size:20px;
+	}
 	#board {
 		letter-spacing:12px;
-		font-size:18px;
+		font-size:20px;
+	}
+	#guessed {
+		font-size:20px;
+	}
+	#lives, #wins, #losses {
+		font-size:20px;
 	}
 	div.container-fluid {
-		max-width: 360px;
-		min-width:320px;
+/*		max-width: 360px;
+		min-width:320px;*/
+		min-width:100%;
 		padding:0;
+		margin:0;
 	}
 	.jumbotron h1 {
-		font-size:60px;
+		font-size:50px;
 		width:auto;
+		padding-bottom:10px;
 	}
 	#thanks {
 		font-size:10px;
 	}
-	#lives, #guessed, #wins {
-	font-size:1em;
-}
-
 }

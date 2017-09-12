@@ -14,43 +14,67 @@
 	<div class="container-fluid">
 		<div class="jumbotron">
 			<div class="row">
-			<div class="col-md-12">
-			<h1>Hangman</h1>
-			</div>
-			</div>
-			<div class="row">
-			<div class="col-md-12">
-			<div class="panel panel-default">
-			<div class="panel-heading">
-				<div class="panel-title">Current Phrase</div>
-			</div>
-			<div class="panel-body">
-				
-				<div id="board" onclick = "openKeyboard()">
-				
-				<!--Puzzle appears here. Clicking it opens keyboard on mobile-->
-						
+				<div class="col-md-12">
+					<h1>Hangman</h1>
 				</div>
 			</div>
-			</div>
-			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">Current Phrase</div>
+						</div>
+						<div class="panel-body">
+							<div id="board" onclick = "openKeyboard()">
+							<!--Puzzle appears here. Clicking it opens keyboard on mobile-->	
+							</div>
+						</div>
+					</div>
+				</div>
 				<input type="text" id="hiddenInput">
 			</div>
+
+			<div class="row" id="score">
+				<div class="col-md-4">
+	 				<div id="lives">
+					<!--guesses left-->
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div id="wins">
+						<!--Number of wins-->
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div id="losses">
+						<!--number of losses-->
+					</div>
+				</div>
+			</div>
+
+
 			<div class="row">
-			<div class="col-md-12">
- 				<div id="lives">
-				<!--Incorrect guesses left-->
+				<div class="col-md-12">
+					<div class="panel panel-default" id="guessed-panel">
+						<div class="panel-heading">
+							<div class="panel-title" id="guessed-title">
+							Already Guessed
+							</div>
+						</div>
+						<div class="panel-body">	
+							<div id="guessed">
+								<!--Letters already guessed-->
+							</div>
+						</div>
+					</div>
 				</div>
-				<div id="guessed">
-				<!--Letters already guessed-->
+				
+			</div>
+			<div class="row" id="button-row">
+				<div class="col-md-12">
+					<p id="button"><a class="btn btn-default btn-lg" onclick="thisGame.newGame()" role="button">Next Game</a></p>
 				</div>
-				<div id="wins">
-				<!--Number of wins-->
-				</div>
-			
-		  	<p id="button"><a class="btn btn-default btn-lg" onclick="thisGame.newGame()" role="button">Next Game</a></p>
-		</div>
-		</div>
+			</div>
 		</div>
     <footer>
 

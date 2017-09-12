@@ -1,12 +1,14 @@
 
+var gameOver = false;
 function HangmanGame(phraseList, lives) {
 	this.alreadyGuessed = [];
 	this.puzzle = new Puzzle(phraseList);
 	this.lives = lives;
 	this.wins = 0;
-	var gameOver = false;
-	var threatLevels = ["black", "red", "orange", "yellow", "green", "blue", "indigo", "violet"];
-	var threatInverse = ["white", "blue", "indigo", "violet", "magenta", "red", "orange", "yellow"];
+	this.losses = 0;
+	// var gameOver = false;
+	var threatLevels = ["black", "red", "orange", "#FFCA00", "green", "blue", "indigo", "violet"];
+	var threatInverse = ["white", "#00BFD8", "indigo", "violet", "magenta", "red", "orange", "yellow"];
 	this.updateScreen = function(){
 		//display this.puzzle
 		console.log(this.puzzle.board());
@@ -14,9 +16,10 @@ function HangmanGame(phraseList, lives) {
 		console.log("Already Guessed: " + this.alreadyGuessed.join(" "));
 		console.log("Number of Incorrect Guesses Remaining: " + this.lives);
     document.querySelector("#board").innerHTML = this.puzzle.board();
-    document.querySelector("#lives").innerHTML = "guesses left: " + this.lives;
-    document.querySelector("#guessed").innerHTML = "already guessed: " + this.alreadyGuessed.join(" ");
+    document.querySelector("#lives").innerHTML = "Guesses left: " + this.lives;
+    document.querySelector("#guessed").innerHTML = this.alreadyGuessed.join(" ");
     document.querySelector("#wins").innerHTML = "Wins: " + this.wins;
+    document.querySelector("#losses").innerHTML = "Losses: " + this.losses;
     document.querySelector(".jumbotron").style.background = threatLevels[this.lives];
     document.querySelector(".jumbotron").style.color = threatInverse[this.lives];
 	}
@@ -40,45 +43,34 @@ function HangmanGame(phraseList, lives) {
 				this.lives --;
 				if (this.lives < 1){
 					this.updateScreen();
-					return this.youLose();
+					this.losses++;
+					return this.gameOverScreen("Lose");
 				}else{
 					return this.updateScreen();
 				}
 			}
 			if(this.puzzle.board().indexOf("_") == -1) {
-				return this.youWin();
-
+				this.wins++;
+				return this.gameOverScreen("Win");
 			}else{
 				return this.updateScreen();
 			}
 		}
 	}
 
-	this.youLose = function(){
+	this.gameOverScreen = function(winStr){
 		var answer = this.puzzle.phrase;
-		document.querySelector(".jumbotron h1").style.display = "initial";
-		document.querySelector(".jumbotron h1").innerHTML = "You Lose!";
+		document.querySelector(".jumbotron h1").style.display = "visible";
+		document.querySelector(".jumbotron h1").style.paddingBottom = "20px";
+		document.querySelector(".jumbotron h1").innerHTML = "You " + winStr + "!";
 		document.querySelector("#board").innerHTML = answer;
 		document.querySelector("#hiddenInput").blur(); 
 		document.querySelector("#button").style.display = "initial";
 		document.querySelector("#button").focus();
 		gameOver = true;
+
 		return;
 	}
-
-	this.youWin = function(){
-		this.wins ++;
-		var answer = this.puzzle.phrase;
-		document.querySelector(".jumbotron h1").style.display = "initial";
-		document.querySelector(".jumbotron h1").innerHTML = "You Win!";
-		document.querySelector("#board").innerHTML = answer;
-		document.querySelector("#hiddenInput").blur(); 
-		document.querySelector("#button").style.display = "initial";
-		document.querySelector("#button").focus();
-		gameOver = true;
-		return;
-	}
-
 
 	this.newGame = function(){
 		document.querySelector("#hiddenInput").innerHTML = ""; 
@@ -92,6 +84,8 @@ function HangmanGame(phraseList, lives) {
 		this.alreadyGuessed = [];
 		return this.updateScreen();
 	}
+
+
 }
 
 
@@ -141,6 +135,9 @@ function openKeyboard(){
 document.onkeypress = function(event){
 	var guess = event.key.toLowerCase();
 	var code = event.keyCode;
+	if (gameOver == true && code == 13){
+		return thisGame.newGame();
+	}
 	return submitGuess(guess, code);
 }
 
@@ -157,10 +154,16 @@ function simulatedBackspace(){
 	document.querySelector("#hiddenInput").value = ""; 
 }
 
+// $('#hiddenInput').on('keyup', function( event ){
+// 	var guess = $(this).val().split('').pop().toLowerCase();
+// 	var code = guess.charCodeAt();
+// 	return submitGuess(guess, code);
+// });
+
 function submitGuess(guess, code){
 	simulatedBackspace();
 	if (code >= 97 && code <= 122){
-		thisGame.takeTurn(guess);
+		return thisGame.takeTurn(guess);
 	}
 }
 
@@ -181,7 +184,7 @@ var colorIdioms = ["a white lie","white noise","white as a sheet","white as a gh
 "beyond the black stump","in the red","a redhead","red light district","to see red","red with rage",
 "turn red","a red herring","to paint the town red","a red flag","caught red-handed",
 "roll out the red carpet","red tape","not one red cent","a red letter day","a scarlet woman",
-"scarlet fever","red-hot","red card","a redskin","red alert","a red-blooded male","a redshift",
+"scarlet fever","red-hot","red card","red alert","a red-blooded male","a redshift",
 "like a red flag to a bull","red","bleed red ink","red in tooth and claw","redlining","redshirting",
 "a red state","a redneck","a red bone","the red scare","the red eye","green with envy",
 "the green-eyed monster","to give the green light","to be green","to be green","the green room",
@@ -190,10 +193,10 @@ var colorIdioms = ["a white lie","white noise","white as a sheet","white as a gh
 "to greenwash something","little green men","as sure as God made little green apples",
 "colorless green ideas sleep furiously","to have green fingers","to have a green thumb","a greenie",
 "a green card","a greenhorn","greenbacks","yellow","a yellow streak","yellow-bellied","yellow journalism",
-"a yellow card","the yellow peril","yellow fever","a yellow boy","yellow fever","a yellow bone",
-"a yellow dog Democrat","out of the blue","a bolt from the blue","to be blue","a blue funk","the blues",
-"a blue note","once in a blue moon","blue-collar","a blue blood","to talk a blue streak","to turn blue",
-"blue with cold","until you're blue in the face","a blue law","blue chip stock","working blue",
+"a yellow card","yellow fever","yellow fever","a yellow bone","a yellow dog Democrat","out of the blue",
+"a bolt from the blue","to be blue","a blue funk","the blues","a blue note","once in a blue moon",
+"blue-collar","a blue blood","to talk a blue streak","to turn blue","blue with cold",
+"until you're blue in the face","a blue law","blue chip stock","working blue",
 "a blue movie","a blueprint","true blue","blue on blue","into the wild blue yonder","blue balls",
 "to turn the air blue","between the devil and the deep blue sea","the boys in blue","the thin blue line",
 "a blueshift","a blue state","a blue","to scream blue murder","a blue-eyed boy","having a blue",
@@ -203,8 +206,8 @@ var colorIdioms = ["a white lie","white noise","white as a sheet","white as a gh
 "to get a pink slip","the pink pound","gray area","gray matter","to give someone gray hairs","gray market",
 "the gray vote","gray nomads","the silver screen","a golden boy","a golden handshake","a golden parachute",
 "the golden hour","golden ears","a golden shower","a golden mean","off-color","to show your true colors",
-"a colorless person","colorful","colorful language","to pass with flying colors","local color",
-"color commentary","a horse of a different color","a person of color","a country's colors"];
+"colorful","colorful language","to pass with flying colors","local color",
+"color commentary","a horse of a different color","a country's colors"];
 
 var thisGame = new HangmanGame(colorIdioms, 6);
 
