@@ -7,21 +7,78 @@ function HangmanGame(phraseList, lives) {
 	this.wins = 0;
 	this.losses = 0;
 	// var gameOver = false;
-	var threatLevels = ["black", "red", "orange", "#FFCA00", "green", "blue", "indigo", "violet"];
+	var threatLevels = ["black", "red", "orange", "#FFCA00", "#7D9F5D", "#1D669D", "indigo", "violet"];
 	var threatInverse = ["white", "#00BFD8", "indigo", "violet", "magenta", "red", "orange", "yellow"];
+
+	this.randomComplements = function(){
+		var red = Math.floor(Math.random() * 255) + 1;
+		var green = Math.floor(Math.random() * 255) + 1;
+		var blue = Math.floor(Math.random() * 255) + 1;
+
+		var rComp = 255 - red;
+		var gComp = 255 - green;
+		var bComp = 255 - blue;
+
+		function convert(dec){//convert numbers between 0 and 255 to hex string
+		  var a = Math.floor(dec/16);
+		  var b = dec%16;
+		  var f = function(x){
+		    switch(x){
+		      case 10:
+		        x = "A";
+		        break;
+		      case 11:
+		        x = "B";
+		        break;
+		      case 12:
+		        x = "C";
+		        break;
+		      case 13:
+		        x = "D";
+		        break;
+		      case 14:
+		        x = "E";
+		        break;
+		      case 15:
+		        x = "F";
+		        break;
+		      case 16:
+		        x = "G";
+		        break;
+		      default:
+		        x = x.toString();
+		    }
+		    return x;
+		  } 
+		  return (f(a) + f(b));
+		}
+		var color = "#" + (convert(red) + convert(green) + convert(blue));
+		var complement = "#" + (convert(rComp) + convert(gComp) + convert(bComp));
+		return [color,complement];
+	}
+
+	var bg = ["black"];
+	var fg = ["white"];
+	for(var q = 0; q < 7; q ++){
+		var rndComp = this.randomComplements();
+		bg.push(rndComp[0]);
+		fg.push(rndComp[1]);
+	}
+
 	this.updateScreen = function(){
 		//display this.puzzle
 		console.log(this.puzzle.board());
 		console.log("Wins: " + this.wins);
 		console.log("Already Guessed: " + this.alreadyGuessed.join(" "));
 		console.log("Number of Incorrect Guesses Remaining: " + this.lives);
+		console.log("this.randomComplements() = ", this.randomComplements());
     document.querySelector("#board").innerHTML = this.puzzle.board();
     document.querySelector("#lives").innerHTML = "Guesses left: " + this.lives;
     document.querySelector("#guessed").innerHTML = this.alreadyGuessed.join(" ");
     document.querySelector("#wins").innerHTML = "Wins: " + this.wins;
     document.querySelector("#losses").innerHTML = "Losses: " + this.losses;
-    document.querySelector(".jumbotron").style.background = threatLevels[this.lives];
-    document.querySelector(".jumbotron").style.color = threatInverse[this.lives];
+    document.querySelector(".jumbotron").style.background = bg[this.lives];//threatLevels[this.lives];
+    document.querySelector(".jumbotron").style.color = fg[this.lives];//threatInverse[this.lives];
 	}
 
 	this.legalMove = function(char){
@@ -132,21 +189,21 @@ function openKeyboard(){
 }
 
 //this detects keystrokes from hard keyboard and iPhone virtual keyboard
-// document.onkeypress = function(event){
-// 	var guess = event.key.toLowerCase();
-// 	var code = event.keyCode;
-// 	if (gameOver == true && code == 13){
-// 		return thisGame.newGame();
-// 	}
-// 	return submitGuess(guess, code);
-// }
+document.onkeypress = function(event){
+	var guess = event.key.toLowerCase();
+	var code = event.keyCode;
+	if (gameOver == true && code == 13){
+		return thisGame.newGame();
+	}
+	return submitGuess(guess, code);
+}
 
 //android workaround - oninput.data, then backspace after each keystroke// 
-// document.oninput = function(event){
-// 	var guess = event.data.toLowerCase();
-// 	var code = guess.charCodeAt();
-// 	return submitGuess(guess, code);
-// }
+document.oninput = function(event){
+	var guess = event.data.toLowerCase();
+	var code = guess.charCodeAt();
+	return submitGuess(guess, code);
+}
 
 //needed for Android workaround
 function simulatedBackspace(){
@@ -154,14 +211,14 @@ function simulatedBackspace(){
 	document.querySelector("#hiddenInput").value = ""; 
 }
 
-$('#hiddenInput').on('keyup', function( event ){
-	var guess = $(this).val().split('').pop().toLowerCase();
-	var code = guess.charCodeAt();
-	return submitGuess(guess, code);
-});
+// $('#hiddenInput').on('keyup', function( event ){
+// 	var guess = $(this).val().split('').pop().toLowerCase();
+// 	var code = guess.charCodeAt();
+// 	return submitGuess(guess, code);
+// });
 
 function submitGuess(guess, code){
-	// simulatedBackspace();
+	simulatedBackspace();
 	if (code >= 97 && code <= 122){
 		return thisGame.takeTurn(guess);
 	}
