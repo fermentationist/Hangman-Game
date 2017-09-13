@@ -57,13 +57,21 @@ function HangmanGame(phraseList, lives) {
 		return [color,complement];
 	}
 
-	var bg = ["black"];
-	var fg = ["white"];
-	for(var q = 0; q < 7; q ++){
-		var rndComp = this.randomComplements();
-		bg.push(rndComp[0]);
-		fg.push(rndComp[1]);
+	this.colorArrays = function(){
+		var bg = ["black"];
+		var fg = ["white"];
+		for(var q = 0; q < 7; q ++){
+			var rndComp = this.randomComplements();
+			bg.push(rndComp[0]);
+			fg.push(rndComp[1]);
+		}
+		return [bg,fg];
 	}
+
+	var newColorSet = this.colorArrays();
+
+	this.backgroundColors = newColorSet[0];
+	this.textColors = newColorSet[1];
 
 	this.updateScreen = function(){
 		//display this.puzzle
@@ -77,8 +85,8 @@ function HangmanGame(phraseList, lives) {
     document.querySelector("#guessed").innerHTML = this.alreadyGuessed.join(" ");
     document.querySelector("#wins").innerHTML = "Wins: " + this.wins;
     document.querySelector("#losses").innerHTML = "Losses: " + this.losses;
-    document.querySelector(".jumbotron").style.background = bg[this.lives];//threatLevels[this.lives];
-    document.querySelector(".jumbotron").style.color = fg[this.lives];//threatInverse[this.lives];
+    document.querySelector(".jumbotron").style.background = this.backgroundColors[this.lives];//threatLevels[this.lives];
+    document.querySelector(".jumbotron").style.color = this.textColors[this.lives];//threatInverse[this.lives];
 	}
 
 	this.legalMove = function(char){
@@ -117,7 +125,7 @@ function HangmanGame(phraseList, lives) {
 
 	this.gameOverScreen = function(winStr){
 		var answer = this.puzzle.phrase;
-		document.querySelector(".jumbotron h1").style.display = "visible";
+		document.querySelector(".jumbotron h1").style.display = "block";
 		document.querySelector(".jumbotron h1").style.paddingBottom = "20px";
 		document.querySelector(".jumbotron h1").innerHTML = "You " + winStr + "!";
 		document.querySelector("#board").innerHTML = answer;
@@ -139,6 +147,9 @@ function HangmanGame(phraseList, lives) {
 		this.puzzle = new Puzzle(phraseList);
 		this.lives = lives;
 		this.alreadyGuessed = [];
+		var newColorSet = this.colorArrays();
+		this.backgroundColors = newColorSet[0];
+		this.textColors = newColorSet[1];
 		return this.updateScreen();
 	}
 
