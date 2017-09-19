@@ -10,19 +10,34 @@ function HangmanGame(phraseList, lives) {
 	var threatLevels = ["black", "red", "orange", "#FFCA00", "#7D9F5D", "#1D669D", "indigo", "violet"];
 	var threatInverse = ["white", "#00BFD8", "indigo", "violet", "magenta", "red", "orange", "yellow"];
 
+	// this.comp255 = function (n) {
+	// 	var x = n + 127.5;
+	// 	if (x >255) {
+	// 		x -= 255;
+	// 	}	
+	// 	return x;
+	// }
+
+	this.complementaryRGB = function(r, g, b){//found this formula at https://forum.processing.org/one/topic/the-opposite-of-a-color.html. 
+		var minRGB = Math.min(r, Math.min(g, b));
+		var maxRGB = Math.max(r, Math.max(g, b));
+		var minPlusMax = minRGB + maxRGB;
+		return [minPlusMax-r, minPlusMax-g, minPlusMax=b];
+	}
 	this.randomComplements = function(){
 		var red = Math.floor(Math.random() * 255) + 1;
 		var green = Math.floor(Math.random() * 255) + 1;
 		var blue = Math.floor(Math.random() * 255) + 1;
-
-		var rComp = 255 - red;
-		var gComp = 255 - green;
-		var bComp = 255 - blue;
+		var rgbComp = this.complementaryRGB(red, green, blue);
+		var rComp = rgbComp[0];//this.comp255(red);//255 - red;
+		var gComp = rgbComp[1];//this.comp255(green);//255 - green;
+		var bComp = rgbComp[2];//this.comp255(blue);//255 - blue;
 
 		function convert(dec){//convert numbers between 0 and 255 to hex string
-		  var a = Math.floor(dec/16);
-		  var b = dec%16;
-		  var f = function(x){
+
+		  	var a = Math.floor(dec/16);
+		  	var b = dec%16;
+		  	var f = function(x){
 		    switch(x){
 		      case 10:
 		        x = "A";
@@ -253,7 +268,7 @@ var colorIdioms = ["a white lie","white noise","white as a sheet","white as a gh
 "turn red","a red herring","to paint the town red","a red flag","caught red-handed",
 "roll out the red carpet","red tape","not one red cent","a red letter day","a scarlet woman",
 "scarlet fever","red-hot","red card","red alert","a red-blooded male","a redshift",
-"like a red flag to a bull","red","bleed red ink","red in tooth and claw","redlining","redshirting",
+"like a red flag to a bull","red","bleed red ink","red in tooth and claw","redshirting",
 "a red state","a redneck","a red bone","the red scare","the red eye","green with envy",
 "the green-eyed monster","to give the green light","to be green","to be green","the green room",
 "village green","to turn green","green around the gills","a greenbelt","greens","a green","a greengrocer",
